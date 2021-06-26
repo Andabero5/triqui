@@ -13,7 +13,7 @@ class Board:
 
     def isValidSquare(self, row, col): return self.board[row][col] == 0
 
-    def boardFull(self, row, col):
+    def boardFull(self):
         for row in range(3):
             for col in range(3):
                 if self.board[row][col] == 0:
@@ -50,7 +50,7 @@ class Board:
     def win(self, player):
         # veertical win
         for col in range(3):
-            if self.board[0][col] == player and self.board[1][col] == player and self.board[1][col] == player:
+            if self.board[0][col] == player and self.board[1][col] == player and self.board[2][col] == player:
                 return True
         # horizontal win
         for row in range(3):
@@ -61,5 +61,10 @@ class Board:
         if self.board[0][0] == player and self.board[1][1] == player and self.board[2][2] == player:
             return True
 
-    def a(self):
-        return self.board
+    def restart(self, screen):
+        screen.fill(pygame.Color("black"))
+        for row in range(3):
+            for col in range(3):
+                self.board[row][col] = 0
+
+    def a(self): return self.board
