@@ -10,7 +10,7 @@ class Database:
             host='localhost',
             user='root',
             password='Andres5354317',
-            db='jugador'
+            db='triqui'
         )
         self.cursor = self.connection.cursor()
 
@@ -24,7 +24,7 @@ class Database:
             raise
 
     def saveScore(self, score, name):
-        insertScore = f"INSERT INTO puntaje SET puntaje = {score}, id_jugador= ( SELECT id_jugador FROM jugador WHERE nombre='{name}');"
+        insertScore = f"INSERT INTO puntaje SET total = {score}, id_jugador_fk= ( SELECT id_jugador FROM jugador WHERE nombre='{name}');"
         try:
             self.cursor.execute(insertScore)
             self.connection.commit()
@@ -32,7 +32,7 @@ class Database:
             raise
 
     def scores(self):
-        sql = "SELECT nombre, puntaje FROM jugador, puntaje WHERE jugador.id_jugador= puntaje.id_jugador ORDER BY puntaje DESC LIMIT 5"
+        sql = "SELECT nombre, total FROM jugador, puntaje WHERE jugador.id_jugador= puntaje.id_jugador_fk ORDER BY total DESC LIMIT 5"
         try:
             self.cursor.execute(sql)
             users = self.cursor.fetchall()

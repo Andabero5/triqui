@@ -99,10 +99,6 @@ while playing:
                     pygame.time.wait(1000)
                     wait = False
                 board.restart(screen)
-                pygame.draw.line(screen, constants.WHITE,
-                                 (450, 0), (450, 900), 1)
-                pygame.draw.line(screen, constants.WHITE,
-                                 (0, 450), (900, 450), 1)
                 textSurface = font.render(
                     f"Puntaje Actual: {player1.name}: {player1.score} y {player2.name}: {player2.score}", True, constants.WHITE)
                 screen.blit(textSurface, (100, 250))
