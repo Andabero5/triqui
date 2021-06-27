@@ -10,7 +10,7 @@ class Database:
             host='localhost',
             user='root',
             password='Andres5354317',
-            db='triqui'
+            db='jugador'
         )
         self.cursor = self.connection.cursor()
 
@@ -32,7 +32,13 @@ class Database:
             raise
 
     def scores(self):
-        pass
+        sql = "SELECT nombre, puntaje FROM jugador, puntaje WHERE jugador.id_jugador= puntaje.id_jugador ORDER BY puntaje DESC LIMIT 5"
+        try:
+            self.cursor.execute(sql)
+            users = self.cursor.fetchall()
+            return users
+        except Exception as e:
+            raise
 
 
 class Player:
@@ -44,7 +50,6 @@ class Player:
         self.score += 1
 
     def saveScore(self):
-        print(self.score, self.name)
         database = Database()
         database.saveName(self.name)
         database.saveScore(self.score, self.name)
